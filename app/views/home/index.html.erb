@@ -1,0 +1,19 @@
+I am index.html.erb
+
+<script language="javascript">
+    var dispatcher = new WebSocketRails('<%=request.env['SERVER_NAME']%>:3000/websocket');
+    var channel_name = 'posts';
+    var channel = dispatcher.subscribe(channel_name);
+      channel.bind('new', function(post) { 
+      console.log('a new post about '+post+' arrived!');
+      console.log(post);
+    });
+      channel.bind('connect', function(user) {
+      console.log('a new user connected:'+user+' arrived!');
+      console.log(user);
+    });
+      channel.bind('disconnect', function(user) {
+      console.log('a user disconnected:'+user+' arrived!');
+      console.log(user);
+    });
+</script>
